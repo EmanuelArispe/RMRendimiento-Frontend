@@ -1,20 +1,31 @@
-export default function Login() {
 
-    function handleSubmit(event) {
+// eslint-disable-next-line react/prop-types
+export default function Login({addToken}) {
+
+    function handleSubmitLogin(event) {
         event.preventDefault();
-        const fd = new FormData(event.target);
-        const data = Object.fromEntries(fd.entries()); // Convert FormData to object
-        console.log(data);
+        const data = new FormData(event.target);
+        const user = {name: data.get("user"), password: data.get("password")};
+
+        fetch("http://localhost:8080/api/authenticate",
+            {method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(user)})
+            .then(response => response.json())
+            .then(data => {
+                const token = data.id_token;
+                addToken(token);
+                });
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmitLogin}>
             <h2>Login</h2>
 
             <div className="control-row">
                 <div className="control no-margin">
-                    <label htmlFor="email">Email</label>
-                    <input id="email" type="email" name="email" />
+                    <label htmlFor="user">Usuario</label>
+                    <input id="user" type="text" name="user" />
                 </div>
 
                 <div className="control no-margin">

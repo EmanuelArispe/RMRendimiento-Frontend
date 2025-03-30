@@ -5,11 +5,11 @@ import UserFormComponent from "./crudComponents/UserFormComponent.jsx";
 import UserDeleteComponent from "./crudComponents/UserDeleteComponent.jsx";
 
 // eslint-disable-next-line react/prop-types
-export default function SectionComponent({children}) {
+export default function SectionComponent({token,children}) {
 
     if(children === 'get') {
         return (
-           <UserListComponent/>
+           <UserListComponent tokenValue={token}/>
         )
     }
     if(children === 'put') {

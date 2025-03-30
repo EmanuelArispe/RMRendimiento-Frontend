@@ -2,7 +2,7 @@ import ButtonComponent from "./ButtonComponent.jsx";
 import {useState} from "react";
 import SectionComponent from "./SectionComponent.jsx";
 
-export default function Main() {
+export default function Main({tokenValue}) {
     const [selectedButton, setSelectedButton] = useState('Selecciona una opción');
 
     function handleSelect(selectedButton) {
@@ -32,7 +32,7 @@ export default function Main() {
                     }}>Eliminar Usuario</ButtonComponent>
                 </ol>
             </li>
-            <SectionComponent>{selectedButton}</SectionComponent>
+            <SectionComponent token={tokenValue}>{selectedButton}</SectionComponent>
         </>
     )
 }
